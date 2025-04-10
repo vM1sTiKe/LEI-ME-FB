@@ -26,24 +26,29 @@ calc_freq_df <- function(data_column, cumulative = TRUE) {
 # Calcula os pontos de corte para as classes usando a regra de Sturges.
 calc_classes <- function(data_column) {
   # Dimensão da Amostra
-  n <- length(data)
+  n <- length(data_column)
 
   # Número de classes
-  k <- trunc(1 + log(n) / log(2))
+  k <- trunc(1 + log(n, 2))
+  
 
   # Amplitude das classes
-  h <- (max(data) - min(data)) / k
+  h <- ceiling((max(data_column) - min(data_column)) / k)
+  
 
   # Limite Inferior
-  limite_inf <- min(data)
+  limite_inf <- min(data_column)
 
   # Limite Superior
   limite_sup <- (limite_inf + h * k)
 
-  # Classes
+  # Breaks
   breaks <- seq(from = limite_inf, to = limite_sup, by = h)
+  
+  # Cut classes
+  cuts <- cut(data_column, breaks = breaks, right = FALSE, include.lowest = TRUE, dig.lab = 20)
 
-  return(breaks)
+  return(cuts)
 }
 
 

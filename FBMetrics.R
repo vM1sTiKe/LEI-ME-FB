@@ -4,42 +4,49 @@
 # install.packages("rstudioapi")
 library(here)
 
-# Usando a API do RStudio recolhe o caminho do ficheiro atual
-setwd(dirname(rstudioapi::getSourceEditorContext()$path))
-source("./Scripts/FBMetrics_Dataset.r")
-source("./Scripts/FBMetrics_Functions.r")
+# Carrega métodos e dataset
+source(here("scripts", "FBMetrics_Dataset.r"))
+source(here("scripts", "FBMetrics_Functions.r"))
 
-# CALCULOS ---------------------------------------------------------------------
+# Carrega tabelas de frequencia
+source(here("scripts", "FBMetrics_FrequencyTables.r"))
 
-# Analise Descritiva
-## Type (Qualitativa Nominal)
-(freq_type <- calc_freq_df(Posts$Type, cumulative = FALSE))
-## Category (Qualitativa Nominal)
-(freq_category <- calc_freq_df(Posts$Category, cumulative = FALSE))
-## Paid (Qualitativa Nominal)
-(freq_paid <- calc_freq_df(Posts$Paid, cumulative = FALSE))
-## Month (Qualitativa Ordinal)
-(freq_month <- calc_freq_df(Posts$Month))
-## Weekday (Qualitativa Ordinal)
-(freq_weekday <- calc_freq_df(Posts$Weekday))
-## Hour (Quantitativa discreta)
-(freq_hour <- calc_freq_df(Posts$Hour))
-## Total Reach (Quantitativa discreta) (mas temos que estudar como continua)
-(freq_reach <- calc_freq_df(Posts$Total.Reach))
-## Reach by Followers (Quantitativa discreta)
-(freq_reach_followers <- calc_freq_df(Posts$ReachFollowers))
-## Comments (Quantitativa discreta)
-(freq_comments <- calc_freq_df(Posts$Comments))
-## Likes (Quantitativa discreta)
-(freq_likes <- calc_freq_df(Posts$Likes))
-# Shares (Quantitativa discreta)
-(freq_shares <- calc_freq_df(Posts$Shares))
 
 # Estatísticas (mediana, média, moda) de interacções
 (mmm_interactions <- calc_mmm_df(Comments = Posts$Comments, Likes = Posts$Likes, Shares = Posts$Shares))
 
 
 # GRÁFICOS ---------------------------------------------------------------------
+## Type
+barplot( table(Posts$Type), xlab="Tipo", ylab="", main="Publicações por Tipo", col=c("red", "white"))
+pie(freq_type$ni, labels=paste(freq_type$fi*100,"%"), main="Publicações por Tipo", col=2:5)
+legend( "bottomleft", legend=names(table(Posts$Type)), fill=2:5)
+
+# Category
+barplot( table(Posts$Category), xlab="Categoria", ylab="", main="Publicações por Categoria", col=c("red", "white"))
+pie(freq_category$ni, labels=paste(freq_category$fi*100,"%"), main="Publicações por Categoria", col=2:4)
+legend( "bottomleft", legend=names(table(Posts$Category)), fill=2:4)
+
+# Paid
+barplot(  table(Posts$Paid), xlab="Pago", ylab="", main="Publicações por Pagamento", col=c("red", "white"))
+pie(freq_paid$ni, labels=paste(freq_paid$fi*100,"%"), main="Publicações por Pagamento", col=2:3)
+legend( "bottomleft", legend=names(table(Posts$Paid)), fill=2:3)
+
+# Month
+barplot(  table(Posts$Month), xlab="Mês", ylab="", main="Publicações por Mês", col=c("red", "white"))
+pie(freq_month$ni, labels=paste(freq_month$fi*100,"%"), main="Publicações por Mês", col=2:13)
+legend( "bottomleft", legend=names(table(Posts$Month)), fill=2:13)
+
+# Weekday
+barplot(  table(Posts$Weekday), xlab="Dia da Semana", ylab="", main="Publicações por Dia da Semana", col=c("red", "white"))
+pie(freq_weekday$ni, labels=paste(freq_weekday$fi*100,"%"), main="Publicações por Dia da Semana", col=2:8)
+legend( "bottomleft", legend=names(table(Posts$Weekday)), fill=2:8)
+
+# Hour
+barplot(  table(Posts$Hour), xlab="Hora", ylab="", main="Publicações por Hora", col=c("red", "white"))
+pie(freq_hour$ni, labels=paste(freq_hour$fi*100,"%"), main="Publicações por Hora", col=2:23)
+legend( "bottomleft", legend=names(table(freq_hour$xi)), fill=2:23)
+
 
 
 boxplot(Posts$Comments, Posts$Likes, Posts$Shares,

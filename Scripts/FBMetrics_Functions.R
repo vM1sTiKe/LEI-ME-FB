@@ -22,7 +22,6 @@ calc_freq_df <- function(data_column, cumulative = TRUE) {
 }
 
 
-
 # Calcula os pontos de corte para as classes usando a regra de Sturges.
 calc_classes <- function(data_column) {
   # Dimensão da Amostra
@@ -30,17 +29,15 @@ calc_classes <- function(data_column) {
 
   # Número de classes
   k <- trunc(1 + log(n, 2))
-  
 
   # Amplitude das classes
   h <- ceiling((max(data_column) - min(data_column)) / k)
-  
 
   # Limite Inferior
   limite_inf <- min(data_column)
 
   # Limite Superior
-  limite_sup <- (limite_inf + h * k)
+  limite_sup <- (limite_inf + (h * k))
 
   # Breaks
   breaks <- seq(from = limite_inf, to = limite_sup, by = h)
@@ -51,6 +48,14 @@ calc_classes <- function(data_column) {
   return(cuts)
 }
 
+
+# Calcula classes de acordo com o vector fornecido
+calc_custom_classes <- function(data_column, breaks) {
+  # Cut classes
+  cuts <- cut(data_column, breaks = breaks, right = FALSE, include.lowest = TRUE, dig.lab = 20)
+  
+  return(cuts)
+}
 
 
 # Calcula a moda (o valor que aparece com mais frequência) num vetor numérico.

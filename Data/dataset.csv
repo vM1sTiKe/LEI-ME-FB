@@ -1,4 +1,4 @@
-Type,Category,Paid,Month,Weekday,Hour,"Total Reach","Reach by Followers",Comments,Likes,Shares
+Type,Category,Paid,Month,Weekday,Hour,Total_Reach,Reach_by_Followers,Comments,Likes,Shares
 Photo,Product,No,January,Wednesday,4,4188,2200,0,91,28
 Photo,Inspiration,No,January,Wednesday,11,4156,2452,7,91,38
 Photo,Action,No,January,Thursday,2,3778,2388,4,93,18

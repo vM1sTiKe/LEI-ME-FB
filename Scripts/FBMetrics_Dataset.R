@@ -1,5 +1,5 @@
 # Carregar Dataset "Posts" ignorando linhas com NA's
-Posts <- na.omit(read.csv("./Data/dataset.csv"))
+Posts <- na.omit(read.csv(here("Data", "dataset.csv")))
 
 # Type - Qualitativa Nominal
 # Category - Qualitativa Nominal

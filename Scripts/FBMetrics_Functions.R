@@ -50,10 +50,13 @@ calc_classes <- function(data_column) {
 
 
 # Calcula classes de acordo com o vector fornecido
-calc_custom_classes <- function(data_column, breaks) {
+calc_custom_classes <- function(data_column, breaks, labels = NULL) {
   # Cut classes
+  if( missing(labels) == FALSE ) {
+    cuts <- cut(data_column, breaks = breaks, right = FALSE, include.lowest = TRUE, dig.lab = 20, labels = labels)
+    return(cuts)
+  }
   cuts <- cut(data_column, breaks = breaks, right = FALSE, include.lowest = TRUE, dig.lab = 20)
-  
   return(cuts)
 }
 

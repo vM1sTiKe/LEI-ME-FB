@@ -48,6 +48,21 @@ pie(freq_hour$ni, labels=paste(freq_hour$fi*100,"%"), main="Publicações por Ho
 legend( "bottomleft", legend=names(table(freq_hour$xi)), fill=2:23)
 
 
+boxplot(Posts$Hour,
+  names = c("Hour"),
+  main = "Boxplot of Hours",
+  range = 1,
+  col = c("lightblue")
+)
+
+hist(
+  x = Posts$Hour,
+  breaks = calc_breaks(Posts$Hour),
+  right = FALSE,
+  include.lowest = TRUE,
+)
+
+
 
 boxplot(Posts$Comments, Posts$Likes, Posts$Shares,
   names = c("Comments", "Likes", "Shares"),

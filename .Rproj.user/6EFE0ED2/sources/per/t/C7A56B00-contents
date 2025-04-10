@@ -1,0 +1,9 @@
+# Install here if needed
+# install.packages("here")
+library(here)
+
+# Load Functions
+source(here("scripts", "FBMetrics_Aux_Functions.r"))
+
+# Load dataset
+dataset <- read.csv(here("data", "dataset.csv"))

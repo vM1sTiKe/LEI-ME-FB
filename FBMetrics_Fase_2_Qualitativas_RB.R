@@ -1,7 +1,6 @@
 # SETUP ------------------------------------------------------------------------
 
 # install.packages("here")
-# install.packages("rstudioapi")
 library(here)
 
 # Carrega métodos e dataset

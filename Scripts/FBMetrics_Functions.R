@@ -61,7 +61,10 @@ calc_classes <- function(data_column) {
 calc_custom_classes <- function(data_column, breaks, labels = NULL) {
   # Cut classes
   if( missing(labels) == FALSE ) {
-    cuts <- cut(data_column, breaks = breaks, right = FALSE, include.lowest = TRUE, dig.lab = 20, labels = labels)
+    cuts <- cut(data_column, breaks = breaks, right = FALSE, include.lowest = TRUE, dig.lab = 20)
+    # Cola as labels aos cortes, assim concactena as labels enviadas aos varios niveis dos valores dos cuts
+    labels <- paste(labels, levels(cuts))
+    levels(cuts) <- labels
     return(cuts)
   }
   cuts <- cut(data_column, breaks = breaks, right = FALSE, include.lowest = TRUE, dig.lab = 20)

@@ -16,7 +16,7 @@
 (freq_weekday <- calc_freq_df(Posts$Weekday))
 
 ## Hour (Quantitativa discreta)
-(freq_hour <- calc_freq_df(calc_custom_classes(Posts$Hour, c(0, 7, 13, 18, 23), c("Magrudaga [0,7)", "Manhã [7,13)", "Tarde [13,18)", "Noite [18, 23]"))))
+(freq_hour <- calc_freq_df(calc_custom_classes(Posts$Hour, c(0, 7, 13, 18, 23), c("Magrudaga", "Manhã", "Tarde", "Noite"))))
 
 ## Total Reach (Quantitativa discreta) (mas temos que estudar como continua)
 (freq_reach <- calc_freq_df(calc_classes(Posts$Total_Reach)))

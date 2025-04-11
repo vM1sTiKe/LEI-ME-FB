@@ -145,3 +145,31 @@ calc_mmm_df <- function(...) {
 
   return(df_mmm)
 }
+
+draw_bar <- function(data, main = NULL, xlab = NULL, ylab = NULL, col = NULL, ylim = NULL, xlim = NULL, labels = TRUE) {
+  # No caso de não ser enviado ylim cria um default
+  if( missing(ylim) == TRUE) {
+    ylim = c(0, max(data) * 1.2)
+  }
+  
+  # Cria gráfico
+  graph <- barplot(
+    data,
+    ylab = ylab,
+    ylim = ylim,
+    xlab = xlab,
+    xlim = xlim,
+    col = col,
+    main = main,
+  )
+  
+  if( labels == FALSE) return(invisible())
+  # Cria labels em cima das colunas
+  text(
+    x = graph,
+    y = data,
+    labels = data,
+    pos = 3,
+    cex = 1.2,
+  )
+}

@@ -3,13 +3,13 @@
 calc_freq_df <- function(data_column, cumulative = TRUE) {
   # Calcula as frequências absolutas e relativas
   ni <- table(data_column)
-  fi <- round(prop.table(ni), digits = 3)
+  fi <- round(prop.table(ni), digits = 4)
 
   # Cria uma dataframe com os dados de frequência
   df_freq <- data.frame(
     xi = names(ni),
     ni = as.vector(ni),
-    fi = round(as.vector(fi), 3)
+    fi = round(as.vector(fi), 4)
   )
 
   # Adiciona as frequências acumuladas (absolutas e relativas)
@@ -37,7 +37,7 @@ calc_breaks <- function(data_column) {
   limite_inf <- min(data_column)
 
   # Limite Superior
-  limite_sup <- (limite_inf + (h * k))
+  limite_sup <- max(data_column) + h
 
   # Breaks
   breaks <- seq(from = limite_inf, to = limite_sup, by = h)
@@ -146,6 +146,7 @@ calc_mmm_df <- function(...) {
   return(df_mmm)
 }
 
+# Cria gráfico de barras e adiciona as os textos em cima
 draw_bar <- function(data, main = NULL, xlab = NULL, ylab = NULL, col = NULL, ylim = NULL, xlim = NULL, labels = TRUE) {
   # No caso de não ser enviado ylim cria um default
   if( missing(ylim) == TRUE) {
@@ -160,7 +161,7 @@ draw_bar <- function(data, main = NULL, xlab = NULL, ylab = NULL, col = NULL, yl
     xlab = xlab,
     xlim = xlim,
     col = col,
-    main = main,
+    main = main
   )
   
   if( labels == FALSE) return(invisible())
@@ -170,6 +171,52 @@ draw_bar <- function(data, main = NULL, xlab = NULL, ylab = NULL, col = NULL, yl
     y = data,
     labels = data,
     pos = 3,
-    cex = 1.2,
+    cex = 1.2
+  )
+}
+
+# Cria gráfico pie e adiciona as legendas
+draw_pie <- function(data, col = NULL, main = NULL, labels = names(data)) {
+  # Cria gráfico
+  pie(
+    x = data,
+    col = col,
+    main = main,
+    labels = labels,
+    cex = 1.2
+  )
+  
+  # Adiciona legenda
+  legend(
+    "topright",
+    legend = names(data),
+    fill = col,
+    cex = 1.2
+  )
+}
+
+draw_hist <- function(data, breaks = "Sturges", col = NULL, main = NULL, ylab = NULL, xlab = NULL) {
+  hist(
+    x = data,
+    breaks = breaks,
+    ylab = ylab,
+    xlab = xlab,
+    main = main,
+    labels = TRUE,
+    freq = TRUE,
+    right = FALSE,
+    include.lowest = TRUE,
+    col = col
+  )
+}
+
+draw_boxplot <- function(data, col = "lightgray", range = 3, outline = FALSE, main = NULL, ylab = NULL) {
+  boxplot(
+    x = data,
+    col = col,
+    main = main,
+    ylab = ylab,
+    range = range,
+    outline = outline
   )
 }

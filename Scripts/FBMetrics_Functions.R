@@ -1,5 +1,6 @@
 # Calcula a distribuição de frequências como uma dataframe,
 # com frequências absolutas e relativas, e opcionalmente as acumuladas.
+# Qualitativa nominal Ñ tem acumulada
 calc_freq_df <- function(data_column, cumulative = TRUE) {
   # Calcula as frequências absolutas e relativas
   ni <- table(data_column)
@@ -46,12 +47,12 @@ calc_breaks <- function(data_column) {
 }
 
 # Calcula as classes utilizando a regra de Sturges
-calc_classes <- function(data_column) {
+calc_classes <- function(data_column, right = FALSE) {
   # Calc breaks
   breaks <- calc_breaks(data_column)
 
   # Cut classes
-  cuts <- cut(data_column, breaks = breaks, right = FALSE, include.lowest = TRUE, dig.lab = 20)
+  cuts <- cut(data_column, breaks = breaks, right = right, include.lowest = TRUE, dig.lab = 20)
 
   return(cuts)
 }
@@ -195,7 +196,7 @@ draw_pie <- function(data, col = NULL, main = NULL, labels = names(data)) {
   )
 }
 
-draw_hist <- function(data, breaks = "Sturges", col = NULL, main = NULL, ylab = NULL, xlab = NULL) {
+draw_hist <- function(data, breaks = "Sturges", col = "lightgray", main = NULL, ylab = NULL, xlab = NULL) {
   hist(
     x = data,
     breaks = breaks,

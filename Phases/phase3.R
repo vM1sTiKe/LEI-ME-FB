@@ -72,7 +72,7 @@ chi.squared.u <- function(data_column) {
   chisq.test(x = df$ni, p = df$pi)
 }
 
-### Informação para os testes de ajustamento ###
+### Informação para os testes de ajustamento ### -------------------------------
 # Nível de significância está definido para 10%. Ou seja alpha = .1
 
 # TESTE DE AJUSTAMENTO Likes --------------------------------------------------
@@ -82,7 +82,8 @@ chi.squared.u <- function(data_column) {
 # Likes
 mean(Posts$Likes)
 median(Posts$Likes)
-draw_hist(Posts$Likes)
+draw_boxplot(Posts$Likes, col = "lightblue")
+draw_hist(Posts$Likes, col = "lightblue")
 
 chi.squared.exp.classed(Posts$Likes)
 
@@ -90,7 +91,8 @@ chi.squared.exp.classed(Posts$Likes)
 mean(Posts[Posts$Likes < 575,]$Likes)
 # Calculo da média da amostra para fazer o teste = 125.7941
 median(Posts[Posts$Likes < 575,]$Likes)
-draw_hist(Posts[Posts$Likes < 575,]$Likes)
+draw_boxplot(Posts[Posts$Likes < 575,]$Likes, col = "purple")
+draw_hist(Posts[Posts$Likes < 575,]$Likes, col = "purple")
 
 chi.squared.exp.classed(Posts[Posts$Likes < 575,]$Likes)
 
@@ -108,8 +110,8 @@ chi.squared.exp.classed(Posts[Posts$Likes < 575,]$Likes)
 month.to.int = as.integer(factor(Posts$Month))
 mean(month.to.int)
 median(month.to.int)
-draw_boxplot(month.to.int)
-draw_hist(month.to.int, breaks = c(1,2,3,4,5,6,7,8,9,10,11,12,13))
+draw_boxplot(month.to.int, col = "#5ad45a")
+draw_hist(month.to.int, breaks = c(1,2,3,4,5,6,7,8,9,10,11,12,13), col = "#5ad45a")
 lillie.test(month.to.int)
 # Rejeitar H0 pois p-value < alpha
 
@@ -125,7 +127,10 @@ chi.squared.u(Posts$Month)
 # H1 !~ U(7)
 
 weekday.to.int = as.integer(factor(Posts$Weekday))
-draw_hist(weekday.to.int, , breaks = c(1,2,3,4,5,6,7,8))
+mean(weekday.to.int)
+median(weekday.to.int)
+draw_boxplot(weekday.to.int, col = "#ebdc78")
+draw_hist(weekday.to.int, , breaks = c(1,2,3,4,5,6,7,8), col = "#ebdc78")
 
 chi.squared.u(Posts$Weekday)
-# Ñ Rejeitar H0, pois p-value = .6125 > alpja
+# Ñ Rejeitar H0, pois p-value = .6125 > alpha

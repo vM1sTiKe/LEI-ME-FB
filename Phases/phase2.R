@@ -71,6 +71,7 @@ draw_boxplot(
   ylab = "# Comentários por Post",
   col = palette()[10],
 )
+draw_hist(Posts[Posts$Comments < 42,]$Comments, col = palette()[10])
 
 # Likes
 calc_mmm_df(Likes = Posts$Likes)
@@ -89,6 +90,7 @@ draw_boxplot(
   ylab = "# Likes por Post",
   col = palette()[6],
 )
+draw_hist(Posts[Posts$Likes < 575,]$Likes, col = palette()[6])
 
 # Shares
 calc_mmm_df(Shares = Posts$Shares)
@@ -107,3 +109,4 @@ draw_boxplot(
   ylab = "# Shares por Post",
   col = palette()[3],
 )
+draw_hist(Posts[Posts$Shares < 88,]$Shares, col = palette()[3])
